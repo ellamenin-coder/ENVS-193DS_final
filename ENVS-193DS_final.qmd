@@ -134,8 +134,37 @@ knitr::kable(
 
 ```
 
+## e. Running the models
 
+```{r}
+#| label: running-models
 
+# model 1: no interaction
+mod1 <- lm(
+  # assessing case control (nest or no nest) and tree height and ant species
+  case_control ~ height_cm + ant_scientific,
+  # from clean nests data frame
+  data = nests_clean)
+
+# model 2: interaction
+mod2 <- lm(
+  # assessing case control (nest or no nest) and tree height and ant species
+  case_control ~ height_cm * ant_scientific,
+  # from clean nests data frame
+  data = nests_clean)
+
+```
+
+## f. Selecting the best model
+
+```{r}
+#| label: aic
+
+AIC(mod1, mod2)
+
+```
+
+The best model as determined by Akaike's Information Criterion (AIC) included tree height, acacia ant species, and the interaction between tree height and acacia ant species. This model had the lowest AIC value (248.15) compared to the model containing only the main effects of tree height and ant species and no interaction term (263.75).
 
 
 # Problem 3: Affective and exploratory data

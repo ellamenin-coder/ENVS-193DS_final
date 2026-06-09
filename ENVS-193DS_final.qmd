@@ -7,8 +7,37 @@ format: pdf
 # Setting up
 
 ```{r}
+#| label: loading-in-packages
+#| message: false
+#| warning: false
+
+# reading in package: tidyverse
+library(tidyverse)
+# reading in package: ggplot2
+library(ggplot2)
+# reading in package: rstatix
+library(rstatix)
+# reading in package: here
+library(here)
+# reading in package: readr
+library(readr)
+# reading in package: janitor
+library(janitor)
+```
+
+```{r}
+#| label: reading-in-nest-data
 
 ```
+
+
+```{r}
+#| label: reading-in-personal-data
+
+my_data <- read_csv(here("data", "personal_data.csv"))
+
+```
+
 
 # Problem 1: Research writing
 
@@ -34,4 +63,30 @@ One additional variable that could influence American Avocet microhabitat use is
 # Problem 3: Affective and exploratory data
 
 ## a. Comparing visualizations
+
+* My visualizations were very different from each other in the way that I represented my data. My exploratory visualizations focused more on showing visual patterns and trends between variables in my data. My affective visualization did that as well; however, it did it in a much more creative way, as it told a story about my entire day using my data as a tool to do so. There was much more story-telling involved in it. 
+
+* All of my visualizations, both exploratory and my affective visualization, effectively demonstrated patterns regarding my water intake for the day and the conditions I experienced. My exploratory visualizations explicitly showed these through easy-to-read visualizations, while my affective visualization provided the viewer with multiple daily statistical summaries of my personal data that they could then compare. 
+
+* Generally, I noticed in my exploratory visualizations that every variable I considered at least had some solid influence on my daily water intake. For my affective visualization, however, the main pattern shown is the fact that my water intake varies from day to day. So although these sound similar, one kind of visualization (exploratory) explicitly laid out the fact that the variables had relationships, the other kind of visualization (affective) showed the viewer the larger picture of the idea that my water intake is not a fixed value that remains the same every day. I believe this is because I created my affective visualization primarily with the intention of telling a story about my day and how heat and activity contributes to my water intake, rather than focusing on explicitly demonstrating how these variables vary day-by-day along with my water intake.
+
+* I received excellent feedback from my peers! One of them suggested that I add in a couple more days of data into my visualization, which I did end up doing in the form of old posters laying on the floor. However, I still chose to highlight one main day of data, as I found it easier to tell a story about a single day by utilizing primarily that day's data. I basically added the other days so viewers could compare my water intakes depending on the day (I was inspired by calendar pages), but in the end, I chose to focus on a "day-in-my-life" narrative. 
+
+## b. Designing an analysis
+
+```{r}
+#| label: cleaning-and-wrangling-data
+
+# creating new objected for cleaned data using my_data data frame
+my_data_clean <- my_data |> 
+  # cleaning names: all lowercase and adding underscores
+  clean_names() |>
+  # removing an empty row i accidentally included
+  remove_empty("rows") |>
+  # converts sick status into categorical variable
+  mutate(
+    sick = factor(sick_y_n)
+  )
+
+```
 

@@ -61,6 +61,48 @@ One additional variable that could influence American Avocet microhabitat use is
 
 # Problem 2: Data Analysis
 
+## a. Clean and wrangling data
+
+```{r}
+#| label: cleaning-and-wrangling-data
+
+# creating new object for cleaned nests data
+nests_clean <- nests |> 
+  # keep only columns of interest: case control, height, and ant species
+  select(case_control, height_cm, ant_species) |> 
+  # keep only focal ant species
+  filter(ant_species %in% c("AB", "RRB", "BBR")) |> 
+  # new column to create scientific names for each ant species
+  mutate(
+    ant_scientific = case_when(
+      ant_species == "AB" ~ "Crematogaster sjostedti",
+      ant_species == "RRB" ~ "Crematogaster mimosae",
+      ant_species == "BBR" ~ "Crematogaster nigriceps"
+    ),
+    # reordering ant species to be in given order as stated on final assignment instructions
+    ant_scientific = factor(
+      ant_scientific,
+      levels = c(
+        "Crematogaster sjostedti",
+        "Crematogaster mimosae",
+        "Crematogaster nigriceps"
+      )
+    )
+  )
+
+```
+
+
+## b. Response variable
+
+The response variable labeled case control indicates whether a tree contained a bird nest. A value of 1 represents a tree occupied by a bird nest, while a value of 0 represents a tree that did not contain a nest.
+
+## c. Purpose of study
+
+
+
+
+
 
 # Problem 3: Affective and exploratory data
 

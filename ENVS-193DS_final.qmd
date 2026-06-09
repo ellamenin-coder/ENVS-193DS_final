@@ -94,3 +94,63 @@ my_data_clean <- my_data |>
 
 ```
 
+```{r}
+#| label: checking-assumptions
+
+# looking at normal distribution using histogram
+# base layer ggplot with cleaned data frame
+ggplot(data = my_data_clean,
+       # setting x axis: water intake in liters
+       mapping = aes(x = water_intake_l)) +
+  # first layer geom_histogram with 10 bins
+  geom_histogram(bins = 10) +
+  # relabeling x and y axis
+  labs(x = "Daily Water Intake (L)", # x axis is daily water intake in liters
+       y = "Frequency") # y is frequency (number observations in each bin)
+
+# looking at distribution using a qq plot
+# base layer ggplot with cleaned data frame
+ggplot(data = my_data_clean,
+       # looking at water intake in liters
+       mapping = aes(sample = water_intake_l)) +
+  # adding individual observations
+  stat_qq() +
+  # adding in reference line to assess normality of observations
+  stat_qq_line()
+
+```
+
+I examined the distribution of daily water intake using a histogram and a Q-Q plot. The histogram indicated that water intake was left-skewed, and the Q-Q plot showed deviations from the reference line in the tails, suggesting that the data were not normally distributed. Because the assumption of normality was not met, a Wilcoxon rank-sum test is still appropriate to compare water intake between sick and non-sick days.
+
+```{r}
+#| label: performing-wilcox-test
+
+# creating new object from running the wilcoxon rank-sum test
+wilcox_results <- wilcox.test(
+  # examining correlation between water intake and sickness
+  water_intake_l ~ sick,
+  # using my cleaned data data frame
+  data = my_data_clean
+)
+
+# displaying results
+wilcox_results
+
+```
+
+```{r}
+#| label: calculating-effect-size
+
+# calculating effect size
+effect_size <- wilcox_effsize(
+  # my cleaned data frame
+  my_data_clean,
+  # examining correlation between water intake and sickness
+  water_intake_l ~ sick
+)
+
+# displaying results
+effect_size
+
+```
+

@@ -143,19 +143,23 @@ knitr::kable(
 ```{r}
 #| label: running-models
 
-# model 1: no interaction
-mod1 <- lm(
+# model 1: no interaction; glm because binary response variable
+mod1 <- glm(
   # assessing case control (nest or no nest) and tree height and ant species
   case_control ~ height_cm + ant_scientific,
   # from clean nests data frame
-  data = nests_clean)
+  data = nests_clean,
+  # response variable is binary
+  family = binomial)
 
-# model 2: interaction
-mod2 <- lm(
+# model 2: interaction; glm because binary response variable
+mod2 <- glm(
   # assessing case control (nest or no nest) and tree height and ant species
   case_control ~ height_cm * ant_scientific,
   # from clean nests data frame
-  data = nests_clean)
+  data = nests_clean,
+  # response variable is binary
+  family = binomial)
 
 ```
 
@@ -264,6 +268,44 @@ ggplot(data = preds,
 
 ```
 
+## i. Writing a caption
+
+Figure 1. Predicted probability of bird nest occurrence as a function of tree height and acacia ant species. Lines represent predictions from the selected linear regression model and shaded ribbons represent 95% confidence intervals. Points indicate observed nest presence (1) and absence (0) for individual trees. Separate panels show predictions for Crematogaster sjostedti, Crematogaster mimosae, and Crematogaster nigriceps ant species. Data accessed from Lujan, E., Nielsen, R., Short, Z., Wicks, S., Nderitu Watetu, W., Malingati Khasoha, L., Palmer, T. M., Goheen, J. R., & Alston, J. M. (2023). Data, code, and metadata for: Symbiotic acacia ants drive nesting behavior by birds in an African savanna [Data set]. Zenodo. https://doi.org/10.5281/zenodo.8373322
+
+## j. Calculating model predictions
+
+```{r}
+
+# creating new data frame more predictions
+morepreds <- data.frame(
+  # we want to find the predictions at 600 cm height tree
+  height_cm = c(600, 600, 600),
+  # for each of these three ant species:
+   ant_scientific = factor(
+    c(
+      "Crematogaster sjostedti",
+      "Crematogaster mimosae",
+      "Crematogaster nigriceps"
+    ),
+    levels = levels(nests_clean$ant_scientific)
+  )
+)
+  
+# using predict function to find our predictions for this step
+predict(
+  # using model 2
+  mod2,
+  # data is more preds data frame we just made
+  newdata = morepreds,
+  # response
+  type = "response"
+)
+
+```
+
+## k. Interpreting results
+
+The probability of nest occurrence varied with both tree height and acacia ant species (Figure 1). For a tree height of 600 cm, the predicted probability of nest occurrence was 0.205 for trees occupied by Crematogaster sjostedti, 0.741 for trees occupied by Crematogaster mimosae, and about 1.000 for trees occupied by Crematogaster nigriceps. In other words, a 600 cm tree occupied by the Crematogaster nigriceps ant species is going to have a nest. The relationship between tree height and ant species shows that the effect of tree height on nest occurrence were different among ant species, with taller trees occupied by C. nigriceps showing the greatest probability of nest occurrence. According to Lujan, Nielsen, et al. (2023), differences in nest occurrence among ant species may be explained by variation in ant defensive behavior, as some acacia ants provide protection from predators while being less disruptive to nesting birds. These results suggest that both tree characteristics and ant species that already live in that tree do, in fact, influence bird nest site selection.
 
 # Problem 3: Affective and exploratory data
 

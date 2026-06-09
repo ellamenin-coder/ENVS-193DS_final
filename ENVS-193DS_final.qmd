@@ -74,6 +74,10 @@ One additional variable that could influence American Avocet microhabitat use is
 
 ## b. Designing an analysis
 
+To determine whether daily water intake differed between days when I was sick and days when I was not sick, I am using a Wilcoxon rank-sum test. This analysis is appropriate because daily water intake (measured in L) is my response variable and sickness (sick or not sick) is a categorical predictor variable with two levels.
+
+## c. Checking assumptions and running an analysis
+
 ```{r}
 #| label: cleaning-and-wrangling-data
 

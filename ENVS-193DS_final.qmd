@@ -23,6 +23,7 @@ library(here)
 library(readr)
 # reading in package: janitor
 library(janitor)
+
 ```
 
 ```{r}
@@ -99,6 +100,39 @@ The response variable labeled case control indicates whether a tree contained a 
 
 ## c. Purpose of study
 
+* Tree height: In this study, tree height is a continuous quantitative variable measured in centimeters. Taller trees may have a greater probability of nest occurrence because they may provide increased protection from predators, greater visibility, or preferred nesting habitat, all depending on the species and their preferences.
+
+* Acacia ant species: In this study, acacia ant species is a categorical variable with three levels: C. sjostedti, C. mimosae, and C. nigriceps. Nest occurrence may differ among ant species because the ants vary in aggressiveness in their interactions with nesting birds. Consequently, a parent bird may alter their nesting site to avoid certain ant species that are more aggressive.
+
+## d. Table of models
+
+```{r}
+
+# creating data frame that summarizes models
+model_table <- data.frame(
+  # column containing model names: we are making two models (model 1 and model 2)
+  Model = c("Model 1", "Model 2"),
+  # the response variable for both models is nest occurance (whether or not a nest occurs)
+  Response = c(
+    "Nest occurrence",
+    "Nest occurrence"),
+  # the predictors for both models are tree height and ant species present at a given tree of interest
+  Predictors = c(
+    "Tree height + ant species",
+    "Tree height + ant species"),
+  # interaction terms: one model with no, one model with yes, as specified by final assignment instructions
+  Interaction = c(
+    "No",
+    "Yes"))
+
+# creating table from the data frame that can pop up in my quarto doc and look amazing and organized
+knitr::kable(
+  # using the model_table data frame created above
+  model_table,
+  # the table title so we can stay organized and know what the table is trying to convey to us
+  caption = "Candidate linear models used to evaluate the effects of tree height and acacia ant species on nest occurrence.")
+
+```
 
 
 

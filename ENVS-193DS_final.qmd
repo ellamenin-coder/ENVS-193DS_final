@@ -76,6 +76,8 @@ One additional variable that could influence American Avocet microhabitat use is
 
 To determine whether daily water intake differed between days when I was sick and days when I was not sick, I am using a Wilcoxon rank-sum test. This analysis is appropriate because daily water intake (measured in L) is my response variable and sickness (sick or not sick) is a categorical predictor variable with two levels.
 
+Side note: My personal prediction is that there is a correlation, and that I tended to drink more water on days I was sick than days I was not. 
+
 ## c. Checking assumptions and running an analysis
 
 ```{r}
@@ -190,3 +192,10 @@ ggplot(data = my_data_clean,
 
 ```
 
+## e. Figure caption
+
+Figure 1. Daily water intake on days when I was sick and days when the I was not sick. Boxplots show the median and interquartile range of daily water intake (measured in liters) for each sickness category (yes and no). Individual observations are displayed as black jittered points to show the distribution of measurements. The data around the blue box indicates days when the participant was not sick and those around light red box indicates days when the participant was sick.
+
+## f. Write about your results
+
+Daily water intake differed significantly between days when I was sick and days when I was not sick (Wilcoxon rank-sum test, W = 50.5, p = 0.025). As shown in Figure 1, the median water intake was higher on sick days than on non-sick days, supporting my prediction that I would drink more water when ill. Sickness status was associated with a moderate effect on water consumption (r = 0.362), suggesting that the difference was not only statistically significant but also meaningful in magnitude.

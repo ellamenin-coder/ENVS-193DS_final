@@ -28,6 +28,8 @@ library(janitor)
 ```{r}
 #| label: reading-in-nest-data
 
+nests <- read_csv(here("data", "nest_data_final.csv"))
+
 ```
 
 

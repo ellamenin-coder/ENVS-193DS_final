@@ -23,6 +23,10 @@ library(here)
 library(readr)
 # reading in package: janitor
 library(janitor)
+# reading in package: DHARMa
+library(DHARMa)
+# reading in package: ggeffects
+library(ggeffects)
 
 ```
 
@@ -165,6 +169,100 @@ AIC(mod1, mod2)
 ```
 
 The best model as determined by Akaike's Information Criterion (AIC) included tree height, acacia ant species, and the interaction between tree height and acacia ant species. This model had the lowest AIC value (248.15) compared to the model containing only the main effects of tree height and ant species and no interaction term (263.75).
+
+## g. Check the diagnostics
+
+```{r}
+#| label: running-diagnostic-plots-from-DHARMa
+
+sim_res <- simulateResiduals(mod2)
+
+plot(sim_res)
+
+testUniformity(sim_res)
+testDispersion(sim_res)
+testOutliers(sim_res)
+
+```
+
+## h. Visualizing model predictions
+
+```{r}
+
+# creating predictions object and calculating these with ggpredict
+preds <- ggpredict(
+  # model 2 was best fit
+  mod2,
+  # looking at tree height and ant species
+  terms = c("height_cm", "ant_scientific"))
+
+# base layer ggplot with predictions data
+ggplot(data = preds,
+       # aesthetics x = x and y = predicted
+       mapping = aes(x = x,
+                     y = predicted)) +
+  # first layer geom_point for individual observations
+  geom_point(
+    # data cleaned nests data frame
+    data = nests_clean,
+    # setting axes: x is height, y is case control
+    aes(
+      x = height_cm,
+      y = case_control
+    ),
+    # making the points dark green 
+    color = "darkgreen",
+    # making the points slightly transparent so you can see all of them
+    alpha = 0.4
+  ) +
+  # second layer geom_line for prediction line
+  geom_line(
+    # preds data frame
+    data = preds,
+    # setting axes: x is x, y is predicted
+    aes(
+      x = x,
+      y = predicted
+    ),
+    # color tomato for easy visibility
+    color = "tomato3",
+    # line width of one for aesthetics
+    linewidth = 1
+  ) +
+  # third layer: geom ribbon makes the confidence interval ribbon around each one
+  geom_ribbon(
+    # data frame is predctions data frame
+    data = preds,
+    # setting axes: x is x
+    aes(
+      x = x,
+      # y min is the lower value of the confidence interval
+      ymin = conf.low,
+      # y max is the higher value of the confidence interval
+      ymax = conf.high
+    ),
+    # fill in with lighter tomato color for contrast from line
+    fill = "tomato1",
+    # making it see through so you can see the lines and points through the ribbon line
+    alpha = 0.2
+  ) +
+  # grouping by ant species
+  facet_wrap(~group) +
+  # setting titles
+  labs(
+    # x axis title is tree height measured in cm
+    x = "Tree height (cm)",
+    # y axis title is predicted probability of nest occurrence
+    y = "Predicted probability of nest occurrence"
+  ) +
+  # classic theme for easy readability
+  theme_classic() +
+  # removing legend because i find it unnecessary here
+  theme(
+    legend.position = "none"
+  )
+
+```
 
 
 # Problem 3: Affective and exploratory data

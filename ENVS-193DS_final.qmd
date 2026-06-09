@@ -27,3 +27,11 @@ format: pdf
 ## c. Further analysis
 
 One additional variable that could influence American Avocet microhabitat use is water depth (cm), as different birds prefer varying water depths depending on their characteristics. This could be measured at each survey location using a measurement tool, such as a meter stick, or by utilizing a water-depth gauge. In this specific context, water depth may affect habitat use because American Avocets feed by sweeping their bills through shallow water, so they may preferentially use areas with depths that maximize foraging efficiency.
+
+# Problem 2: Data Analysis
+
+
+# Problem 3: Affective and exploratory data
+
+## a. Comparing visualizations
+

@@ -1,7 +1,16 @@
 ---
-title: "envs193ds final"
+title: "ENVS-193DS Final"
 author: "Ella Menin"
-format: pdf
+date: "2026-06-9"
+format:
+  pdf:
+    toc: true # use this to display a table of contents
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\{\}}
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere}
+editor: source
 ---
 
 # Setting up
@@ -32,6 +41,8 @@ library(ggeffects)
 
 ```{r}
 #| label: reading-in-nest-data
+#| message: false
+#| warning: false
 
 nests <- read_csv(here("data", "nest_data_final.csv"))
 
@@ -40,6 +51,8 @@ nests <- read_csv(here("data", "nest_data_final.csv"))
 
 ```{r}
 #| label: reading-in-personal-data
+#| message: false
+#| warning: false
 
 my_data <- read_csv(here("data", "personal_data.csv"))
 
@@ -69,7 +82,7 @@ One additional variable that could influence American Avocet microhabitat use is
 ## a. Clean and wrangling data
 
 ```{r}
-#| label: cleaning-and-wrangling-data
+#| label: cleaning-and-wrangling-data-nests
 
 # creating new object for cleaned nests data
 nests_clean <- nests |> 
@@ -91,9 +104,7 @@ nests_clean <- nests |>
         "Crematogaster sjostedti",
         "Crematogaster mimosae",
         "Crematogaster nigriceps"
-      )
-    )
-  )
+      )))
 
 ```
 
@@ -192,6 +203,8 @@ testOutliers(sim_res)
 ## h. Visualizing model predictions
 
 ```{r}
+#| message: false
+#| warning: false
 
 # creating predictions object and calculating these with ggpredict
 preds <- ggpredict(
@@ -373,6 +386,8 @@ I examined the distribution of daily water intake using a histogram and a Q-Q pl
 
 ```{r}
 #| label: performing-wilcox-test
+#| message: false
+#| warning: false
 
 # creating new object from running the wilcoxon rank-sum test
 wilcox_results <- wilcox.test(

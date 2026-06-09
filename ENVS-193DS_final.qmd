@@ -154,3 +154,39 @@ effect_size
 
 ```
 
+## d. Create a visualization
+
+```{r}
+#| label: creating-boxplot
+
+# base layer ggplot with cleaned data frame
+ggplot(data = my_data_clean,
+       # setting x and y axes
+       mapping = aes(x = sick, # x axis is sickness
+           y = water_intake_l, # y axis is water intake in liters
+           # fill color by sickness yes or no
+           fill = sick)) +
+  # first layer boxplot
+  geom_boxplot(alpha = 0.7, # alpha 0.7 so you can still see individual observations through boxplot
+               # taking out extreme outliers that may mess things up
+               outlier.shape = NA) +
+  # second layer jitterplot to show individual observations
+  geom_jitter(width = 0.15, # controlling width
+              size = 2, # size 2 for easy readability
+              height = 0, # controlling height
+              alpha = 0.7) + # alpha 0.7 so you can see boxplot too
+  # setting custom colors
+  scale_fill_manual(values = c("deepskyblue3", # not sick = pretty blue
+                               "tomato1")) + # sick = red
+  # setting axes titles
+  labs(
+    # x axis is sickness status (sick or not sick)
+    x = "Sickness Status",
+    # y is daily water intake measured in liters
+    y = "Daily Water Intake (L)"
+  ) +
+  # choosing a nice, simple theme
+  theme_bw()
+
+```
+

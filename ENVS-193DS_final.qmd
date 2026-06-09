@@ -1,0 +1,29 @@
+---
+title: "envs193ds final"
+author: "Ella Menin"
+format: pdf
+---
+
+# Setting up
+
+```{r}
+
+```
+
+# Problem 1: Research writing
+
+## a. Transparent statistical methods
+
+* In part 1, my coworker used a linear model, as the response variable is the probability of American Avocet microhabitat use and the predictor variable is the distance to water edge. 
+
+* In part 2, my coworker used a chi-square test of independence because they were testing for an association between two categorical variables: bird species and habitat type.
+
+## b. Suggestions for rewriting
+
+* Part 1: American Avocets were more likely to use some microhabitats than others depending on their distance from the water's edge. This shows that proximity to water is an important variable influencing where American Avocets occupy habitat.
+
+* Part 2: The three bird species (American Avocet, Forster’s Tern, Black-necked Stilt) did not use habitat types in the same way. Habitat use patterns differed among species, showing that different shorebirds may prefer or rely on different habitats within the San Francisco Bay.
+
+## c. Further analysis
+
+One additional variable that could influence American Avocet microhabitat use is water depth (cm), as different birds prefer varying water depths depending on their characteristics. This could be measured at each survey location using a measurement tool, such as a meter stick, or by utilizing a water-depth gauge. In this specific context, water depth may affect habitat use because American Avocets feed by sweeping their bills through shallow water, so they may preferentially use areas with depths that maximize foraging efficiency.

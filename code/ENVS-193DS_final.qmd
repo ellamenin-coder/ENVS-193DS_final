@@ -44,6 +44,7 @@ library(ggeffects)
 #| message: false
 #| warning: false
 
+# reading in nests data using here package
 nests <- read_csv(here("data", "nest_data_final.csv"))
 
 ```
@@ -54,6 +55,7 @@ nests <- read_csv(here("data", "nest_data_final.csv"))
 #| message: false
 #| warning: false
 
+# reading in my data using here package
 my_data <- read_csv(here("data", "personal_data.csv"))
 
 ```

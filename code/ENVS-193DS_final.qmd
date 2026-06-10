@@ -420,6 +420,26 @@ effect_size
 
 ```
 
+```{r}
+
+#| label: calculating-medians
+#| message: false
+#| warning: false
+
+# also calculating medians and sample sizes because it is a wilcoxon rank sum test
+# started with cleaned data frame
+my_data_clean |> 
+  # grouping by sickness status
+  group_by(sick) |> 
+  # using summarize function to find
+  summarize(
+    median_water = median(water_intake_l), # median water intake
+    n = n() # and sample size
+  )
+
+```
+
+
 ## d. Create a visualization
 
 ```{r}
@@ -462,4 +482,4 @@ Figure 1. Daily water intake on days when I was sick and days when the I was not
 
 ## f. Write about your results
 
-Daily water intake differed significantly between days when I was sick and days when I was not sick (Wilcoxon rank-sum test, W = 50.5, p = 0.025). As shown in Figure 1, the median water intake was higher on sick days than on non-sick days, supporting my prediction that I would drink more water when ill. Sickness status was associated with a moderate effect on water consumption (r = 0.362), suggesting that the difference was not only statistically significant but also meaningful in magnitude.
+Daily water intake differed significantly between days when I was sick (median = 2.8 liters, n = 7) and days when I was not sick (median = 2.45 liters, n = 32). As shown in Figure 1, the median water intake was higher on sick days than on non-sick days, supporting my prediction that I would drink more water when ill. (Wilcoxon rank-sum test, W = 50.5, p = 0.025, $\alpha$ = 0.05). Sickness status was associated with a moderate effect on water consumption (r = 0.362), suggesting that the difference was not only statistically significant but also meaningful in magnitude.

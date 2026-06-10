@@ -22,4 +22,4 @@ stored.
 
 ## Rendered PDFs
 
-The rendered PDF of this work can be found here [click here](). 
+The rendered PDF of this work can be found here [click here](https://github.com/ellamenin-coder/ENVS-193DS_final/blob/main/code/ENVS-193DS_final.pdf). 
